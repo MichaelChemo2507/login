@@ -18,7 +18,7 @@ async function addUser(req,res,next){
     next();
 }
 async function deleteUser(req,res,next){
-    let id = Number(req.params.id);
+    let id = Number(req.body.id);
     let q = `DELETE FROM users WHERE id = ${id}`;
     let poolPromise = db_pool.promise();
     try{
@@ -28,11 +28,31 @@ async function deleteUser(req,res,next){
     }
      next();
 }
+async function updateUser(req,res,next){
+    let id = req.body.id;
+    let fullName = req.body.fullName;
+    let userName = req.body.userName;
+    let password = sec_mid.securePass(req.body.pass);
+    let email = req.body.email;
+
+    let poolPromise = db_pool.promise();
+    let row =[];
+    let q = `UPDATE users SET fullName = '${fullName}',`;
+    q+=`userName = '${userName}',pass = '${password}', email = '${email}' WHERE id = ${id}`;
+    try {
+        [row] = await poolPromise.query(q);
+    }catch (err){
+        res.status(500).json({message:err});
+    }
+    res.row = row;
+    next();
+}
 
 
 
 
 module.exports = {
     addUser:addUser,
-    deleteUser:deleteUser
+    deleteUser:deleteUser,
+    updateUser:updateUser
 }
