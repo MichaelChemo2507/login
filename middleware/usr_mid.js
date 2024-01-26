@@ -47,6 +47,18 @@ async function updateUser(req,res,next){
     res.row = row;
     next();
 }
+async function readUser(req,res,next){
+    let poolPromise = db_pool.promise();
+    let row =[];
+    let q = `SELECT * FROM users`;
+    try {
+        [row] = await poolPromise.query(q);
+    }catch (err){
+        res.status(500).json({message:err});
+    }
+    res.row = row;
+    next();
+}
 
 
 
@@ -54,5 +66,6 @@ async function updateUser(req,res,next){
 module.exports = {
     addUser:addUser,
     deleteUser:deleteUser,
-    updateUser:updateUser
+    updateUser:updateUser,
+    readUser:readUser
 }

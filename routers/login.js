@@ -12,7 +12,7 @@ router.get('/login',(req,res)=>{
 router.get('/login2',(req,res)=>{
     render('loginPage',{loginUrlPage:loginUrl});
 })
-router.post('/login',(req,res)=>{
+router.post('/login',[authMid.loginCheck],(req,res)=>{
     if(res.logedIn){
         render('page1');
     }else {

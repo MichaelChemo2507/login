@@ -19,6 +19,7 @@ if (rows.length > 0){
     res.logedIn = true;
     res.user = rows[0];
 }
-
-
+}
+module.exports={
+    loginCheck:loginCheck
 }

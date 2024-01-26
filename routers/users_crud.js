@@ -14,4 +14,7 @@ module.exports = router;
  router.patch('/UPDATE',[usr_mid.updateUser],function (req,res) {
      res.render('page1');
  });
+ router.get('/READ',[usr_mid.readUser],function (req,res) {
+     res.json(res.row);
+ });
 
