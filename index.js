@@ -16,8 +16,8 @@ const {json} = require("express");
 
 const users_rtr = require('./routers/users_crud');
 app.use('/users',users_rtr);
-// const _rtr = require('./routers/USR_R');
-// app.use('/users',users_rtr);
+const _rtr = require('./routers/login');
+app.use('/login',users_rtr);
 
 
 

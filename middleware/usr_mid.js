@@ -6,15 +6,19 @@ async function addUser(req,res,next){
     let password = sec_mid.securePass(req.body.pass);
     let email = req.body.email;
     let q = "INSERT INTO users ";
+    let rows=[];
+    res.lastId =-1;
     q+="(fullName,userName,pass,email) ";
     q+=`VALUES('${fullName}','${userName}','${password}','${email}')`;
     let poolPromise = db_pool.promise();
        try{
-            await poolPromise.query(q);
+         [rows] = await poolPromise.query(q);
        }
        catch (err){
            res.status(500).json({message:err})
        }
+
+       res.lastId = rows.insertID;
     next();
 }
 async function deleteUser(req,res,next){
