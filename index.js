@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 const path = require('path');
 const {json} = require("express");
 
-
+global.loginUrl = 'http://localhost:2506/login/login';
 
 const users_rtr = require('./routers/users_crud');
 app.use('/users',users_rtr);
