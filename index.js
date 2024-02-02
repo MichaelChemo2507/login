@@ -12,13 +12,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 const path = require('path');
 const {json} = require("express");
 
+global.loginUrl = 'http://localhost:2506/login/login';
 
-const front_rtr = require('./routers/FE_R');
-app.use('/front',front_rtr);
 const users_rtr = require('./routers/users_crud');
 app.use('/users',users_rtr);
-// const _rtr = require('./routers/USR_R');
-// app.use('/users',users_rtr);
+const _rtr = require('./routers/login');
+app.use('/login',users_rtr);
 
 
 

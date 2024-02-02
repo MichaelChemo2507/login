@@ -4,19 +4,15 @@ const {render} = require("ejs");
 const router = express.Router();
 module.exports = router;
 
-let loginUrl = '/login';
-let loginUrlErr = '/login2';
+
 router.get('/login',(req,res)=>{
         render('loginPage',{loginUrlPage:loginUrl});
 })
-router.get('/login2',(req,res)=>{
-    render('loginPage',{loginUrlPage:loginUrl});
-})
-router.post('/login',(req,res)=>{
+router.post('/login',[authMid.loginCheck],(req,res)=>{
     if(res.logedIn){
         render('page1');
     }else {
-        res.redirect(loginUrlErr);
+        res.redirect(loginUrl);
     }
 })
 

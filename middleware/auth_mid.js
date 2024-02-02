@@ -1,6 +1,6 @@
 const sec_mid = require("../middleware/seq_mid");
 
-async function loginCheck(req,res,next){
+async function CheckUser(req,res,next){
     let userName = req.body.userName;
     let pass = sec_mid.securePass(req.body.pass);
 
@@ -19,6 +19,7 @@ if (rows.length > 0){
     res.logedIn = true;
     res.user = rows[0];
 }
-
-
+}
+module.exports={
+    CheckUser:CheckUser
 }

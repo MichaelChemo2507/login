@@ -48,11 +48,13 @@
 <body>
     <header></header>
     <main>
-                <form id="loginArea">
+                <form id="loginArea" method="post" action="<%loginUrl%>">
                     <input type="text" name="userName" placeholder="userName"><br>
                     <input type="password" name="pass" placeholder="password"><br>
                     <input type="submit">
                 </form>
+
+        <a href="register.ejs" >sign up</a>
 
     </main>
     <footer></footer>
